@@ -24,7 +24,7 @@
       "purpose": "any maskable"
     }
   ],
-  "start_url": "/index",
+  "start_url": "/",
   "display": "standalone",
   "theme_color": "#3B82F6",
   "background_color": "#F1F5F9",
@@ -69,11 +69,6 @@
       ]
     }
   ],
-  "related_applications": [
-    {
-      "platform": "siitecch",
-      "id": "com.siitecch.app"
-    }
-  ],
+  "related_applications": [],
   "prefer_related_applications": true
 }
