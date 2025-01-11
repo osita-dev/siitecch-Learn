@@ -112,6 +112,25 @@ header .logo h2 {
   font-weight: 700;
 }
 
+div.load{
+  font-size: 25px;
+  color: var(--lightblue);
+  font-family: "Moirai One", system-ui;
+  font-weight: 700;
+}
+
+div.loader{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(---bglight);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
 
 header .social-handle {
   display: flex;
@@ -177,10 +196,8 @@ nav.navbar p {
 
 /* end of navbar */
 section.materials {
-  padding: 8px 5px;
+  padding: 5px 0px;
 }
-
-section.materials section.ends {}
 
 section.materials section.ends .line-width {
   background-color: var(--footerbg);
@@ -292,11 +309,10 @@ section.materials section.ends .line-width .line-color.center {
 
 section.materials .flex-container.about {
   padding: 10px;
-  text-align: justify;
+  text-align: left;
   margin: 5px auto;
   display: flex;
   flex-direction: column;
-  justify-content: center;
 }
 
 
@@ -344,7 +360,7 @@ section.materials .aboutCircle .checkWrite {
   padding: 10px 5px;
   justify-content: center;
   width: 100%;
-  text-align: justify;
+  text-align: left;
 }
 
 
@@ -483,12 +499,12 @@ footer .site-name {
 
 }
 
-footer .about-write {
+/* footer .about-write {
   display: flex;
   flex-direction: column;
-  text-align: justify;
+  text-align: right;
   width: 100%;
-}
+} */
 
 footer .footer-link {
   display: flex;
@@ -534,6 +550,13 @@ footer .footer-link .help {
 footer .footer-link .help .page-links {
   padding: 5px 0px;
   font-size: 16px;
+}
+footer .footer-link .help .page-links.quick {
+  width: 200px;
+  cursor: pointer;
+}
+footer .footer-link .help .page-links.quick:hover {
+  color: var(--blueSocial);
 }
 
 footer .footer-link .help .page-links a:hover {
@@ -601,11 +624,7 @@ button.float-button .share {
   align-items: center;
 }
 
-button.float-button.quick {
-  margin-bottom: 80px;
-  color: var(--white);
-  font-size: 18px;
-}
+
 
 /* Button Styling */
 .float-button {
@@ -712,7 +731,7 @@ section.singleDisplay .introduction {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  text-align: justify;
+  text-align: left;
   width: 100%;
 }
 
@@ -764,7 +783,7 @@ section.singleDisplay .javaContainer .javaIcon {
 section.singleDisplay .category-content {
   display: flex;
   flex-direction: column;
-  text-align: justify;
+  text-align: left;
 
 }
 
@@ -824,7 +843,7 @@ section.card .card-body {
 }
 
 section.card .card-body .youtube-container {
-  margin-top: -30px;
+  /* margin-top: -30px; */
 }
 
 button.card-chevron {
@@ -931,7 +950,7 @@ form.user .term p .linked {
   color: var(--black);
 }
 
-form.user button.eye {
+form.user div.eye {
   display: flex;
   height: 0;
   justify-content: center;
@@ -954,7 +973,6 @@ form.user .password-container {
 nav.navbar .bottomBtn {
   display: flex;
   justify-content: space-between;
-
 }
 
 nav.navbar .bottomBtn button {
@@ -1186,7 +1204,12 @@ section.profile.dark .profile-info .student-email {
   background-color: var(--bgdark);
   color: var(--white);
 }
-
+section.profile.dark .profile-header{
+  background-color: var(--bgdark);
+}
+section.profile.dark button.btn-logout{
+  background-color: var(--blueSocial);
+}
 .popup.dark {
   background-color: var(--bgdark2);
 }
@@ -1203,7 +1226,9 @@ section.materials .flex-container.about.dark .feature_box.three form .inputStyle
   background-color: var(--blueSocial);
   border: none;
 }
-
+section.support.dark .account-details .account-info{
+  background-color: var(--bgdark);
+}
 
 
 
@@ -1270,7 +1295,13 @@ section.materials .flex-container.about.dark .feature_box.three form .inputStyle
     width: 60%;
     margin: 0 auto;
   }
-
+  nav.navbar .bottomBtn{
+    width: 50%;
+    margin: 0 auto;
+  }
+  section.profile button.btn-logout{
+    background-color: red;
+  }
 
 }
 
@@ -1425,3 +1456,223 @@ section.popup .button-container.thankYou {
 section.popup button:hover {
   background-color: var(--greenbtn);
 }
+/* profile section */
+section.profile .profile-header{
+  display: flex;
+  padding: 10px 5px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-color: var(--lightblue);
+  border-bottom-right-radius: 20px;
+  border-bottom-left-radius: 20px;
+}
+section.profile .profile-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 5px 0;
+}
+section.profile .profile-info{
+  color: var(--white);
+  font-size: 20px;
+}
+section.profile .profile-info .student{
+  font-size: 15px;
+}
+section.profile .email-section{
+  padding: 20px 10px;
+}
+section.profile .email-section .profile-email{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  
+}
+section.profile .profile-image .avatar {
+  width: 100px;
+  border-radius: 50%;
+  object-fit: cover; 
+  border: 2px solid #ddd;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+section.profile button.btn-logout{
+  padding: 10px 5px;
+  border-radius: 10px;
+  border: none;
+  background-color: var(--lightblue);
+  color: var(--white);
+  width: 90%;
+  margin: 0 auto;
+  bottom: 10px;
+  position: fixed;
+  right: 0;
+  left: 0;
+}
+/* statistic card */
+/* .card-container {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.card {
+  background-color: #f8f8f8;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  width: 200px;
+  text-align: center;
+}
+
+.card div {
+  font-size: 16px;
+  margin: 10px 0;
+  color: #333;
+} */
+.video-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.video-content {
+  position: relative;
+  background: #000;
+  border-radius: 8px;
+  overflow: hidden;
+  width: 80%;
+  max-width: 800px;
+  aspect-ratio: 16 / 9; /* Maintains a proper video aspect ratio */
+}
+
+.video-content iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-radius: 8px;
+}
+
+.close-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: #fff;
+  color: #000;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  border-radius: 50%;
+  padding: 5px 8px;
+  width: 50px;
+  height: 50px;
+  z-index: 10000;
+}
+
+.close-btn:hover {
+  background: #f00;
+  color: #fff;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .video-content {
+      width: 100%;
+      max-width: 600px;
+  }
+  .close-btn {
+    position: absolute;
+      top: 0px;
+      right: 0px;
+      font-size: 14px;
+      padding: 4px 6px;
+  }
+}
+
+
+section.support {
+  padding: 10px 5px;
+}
+section.support .support-head {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+section.support .support-body p {
+  padding: 5px;
+}
+
+section.support .account-details {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+section.support .account-info {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 1rem;
+  width: 100%;
+  text-align: left;
+  background-color: #f9f9f9;
+}
+
+section.support .account-info p {
+  margin: 0.5rem 0;
+}
+
+section.support .account-details  .copy-btn {
+  margin-top: 0.5rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}
+
+section.support .account-details button.copy-btn:hover {
+  background-color: #0056b3;
+}
+
+/* unauthorased */
+.unauthorized-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f0f0f0;
+  color: #333;
+  text-align: center;
+  padding: 20px;
+  font-family: 'Arial', sans-serif;
+}
+
+.unauthorized-title {
+  font-size: 3rem;
+  font-weight: bold;
+  color: #d9534f; /* Red to signify error */
+  margin-bottom: 1rem;
+}
+
+.unauthorized-message {
+  font-size: 1.2rem;
+  color: #555;
+}
+
+

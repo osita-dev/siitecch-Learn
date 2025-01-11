@@ -84,7 +84,7 @@ export default function Terms() {
 
                 <h2> Contact Information </h2>
                 <p>If you have any questions about these Terms, please contact us at:</p>
-                <li>Email: support@ositakizito4@gmail.com</li>
+                <li>Email: siitecch@gmail.com</li>
                 <li>Phone: +2347016361129</li>
 
                 <h2> Acceptance of Terms</h2>

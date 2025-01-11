@@ -8,6 +8,8 @@ import {
   FaGlobe,
 } from 'react-icons/fa';
 import { FaGithub } from 'react-icons/fa6';
+import Quickref from './quickref';
+
 export default function Footer() {
   const { theme } = useTheme();
   const youTube = "https://youtube.com/@siitecch?si=ngX7lFMF0IWnU8X0";
@@ -21,7 +23,7 @@ export default function Footer() {
         <div className="site-name"></div>
         <div className="about-page">
           <div className="about-write">
-           
+
           </div>
         </div>
         <div className="footer-link">
@@ -39,14 +41,13 @@ export default function Footer() {
             <div className="page-links"><Link to="/about" className="linked">About Us</Link></div>
             <div className="page-links"><Link to="/faq" className="linked">FAQ</Link></div>
             <div className="page-links"><Link to="/developer" className="linked">About Developer</Link></div>
+            <Quickref />
 
-            <div className="copy"/>
-
+            <div className="copy" />
             <div className="page-links"><Link to="/privacy" className="linked">Privacy Policy</Link></div>
             <div className="page-links"><Link to="/terms" className="linked">Terms of Service</Link></div>
             <div className="page-links"><Link to="/cookie" className="linked">Cookie Policy</Link></div>
-
-            <div className="copy"/> 
+            <div className="copy" />
 
             <div className="page-links"><Link to="/sitemap" className="linked">Sitemap</Link></div>
             {/* <div className="page-links"><Link to="/feedback" className="linked">Give Us a FeedBack</Link></div> */}
@@ -54,7 +55,9 @@ export default function Footer() {
           </div>
           <div className="globe"><FaGlobe /><span>English</span> </div>
         </div>
-        <div className="copy">&copy; 2024 siitecch, All reserved right.</div>
+        <div className="copy">
+          &copy; {new Date().getFullYear()} siitecch, All rights reserved.
+        </div>
       </footer>
     </>
   );

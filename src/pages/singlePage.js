@@ -8,31 +8,30 @@ import Card from "../components/card";
 
 export default function SinglePage() {
     const { theme } = useTheme();
-    const { slug } = useParams(); // Get slug from the URL
+    const { slug } = useParams();
     const [language, setLanguage] = useState(null);
     const [loading, setLoading] = useState(true);
     const [errorMessage, setErrorMessage] = useState('');
 
     useEffect(() => {
-        setLoading(true);  // Ensure loading is true each time the slug changes
-        fetch(`https://siitecch.onrender.com/api/languages/${slug}`)
-            .then((response) => {
+        const fetchLanguage = async () => {
+            try {
+                const response = await fetch(`https://siitecch.onrender.com/api/languages/${slug}`);
                 if (!response.ok) {
-                    throw new Error('Failed to load data');
+                    throw new Error('Failed to fetch language');
                 }
-                return response.json();
-            })
-            .then((data) => {
+                const data = await response.json();
                 setLanguage(data);
                 setLoading(false);
-            })
-            .catch((error) => {
-                console.error('Error:', error);
+            } catch (error) {
+                console.error('Error:', error.message);
+                setErrorMessage('Failed to fetch language details.');
                 setLoading(false);
-                setErrorMessage('No data yet, check back later please.');
-            });
-    }, [slug]);  // Fetch data again when the `slug` changes
+            }
+        };
 
+        fetchLanguage();
+    }, [slug]);
 
     if (loading) {
         return (
@@ -65,53 +64,29 @@ export default function SinglePage() {
         <>
             <SingleHeader />
             <section className={`singleDisplay ${theme}`}>
+                {/* Introduction Section */}
                 <div className="introduction">
-                    <h1>{language.name}</h1>
+                    <h1>{language?.name}</h1>
                     <div className="javaScript">
-                        <p>{language.description}</p><br />
-                        <p>{language.more}</p>
+                        <p></p>
                     </div>
                 </div>
-                <br />
+
+                {/* Single Container Section */}
                 <section className="single-container">
-                    {language.categories.map((category) => (
+                    {language?.categories?.map((category) => (
                         <Card
-                            key={category.id}
+                            key={category.id} // Ensure unique ID
                             title={category.name}
-                            youtubeUrl={category.video_link} // Pass YouTube URL dynamically
+                            youtubeUrl={category.video_link}
                         >
                             <div className="category-content">
-                                <div className="content1">
-                                    <p>{category.description}</p>
-                                </div>
-
-                                <div className="content2">
-                                    <p>{category.content}</p>
-                                    <p>{category.answer1}</p>
-                                    <p>{category.answer2}</p>
-                                    <p>{category.answer3}</p>
-                                </div>
-
-                                <div className="content3">
-                                    <p>{category.content1}</p>
-                                    <p>{category.description1}</p>
-                                    <p>{category.answer4}</p>
-                                    <p>{category.answer5}</p>
-                                    <p>{category.answer6}</p>
-                                    <p>{category.answer7}</p>
-                                </div>
-                                <div className="content4">
-                                    <p>{category.description2}</p>
-                                    <p>{category.content2}</p>
-                                </div>
-
-
-                                {category.examples.map((example, idx) => (
-                                    <div key={idx} className="example">
-                                        <h3>{example.title}</h3>
-
+                                <p>{category.content}</p>
+                                {category.examples?.map((example, index) => (
+                                    <div key={index}>
+                                        <h4>{example.title}</h4>
+                                        <div><code>{example.code}</code></div>
                                         <p>{example.description}</p>
-                                        <p>{example.code}</p>
                                     </div>
                                 ))}
                             </div>

@@ -99,7 +99,7 @@ export default function Faq() {
                 <Card title="How do I contact Siitecch for support?">
                     <p>You can reach out to us through:</p>
                     <ul>
-                        <li>Email: support@siitecch.com</li>
+                        <li>Email: ositakizito4@gmail.com</li>
                         <li>The Contact Us page on our website.
                         We’re here to help with any questions or issues you may have.</li>
                     </ul>

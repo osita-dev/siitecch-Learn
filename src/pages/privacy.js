@@ -48,7 +48,7 @@ export default function Privacy() {
 
                     <h2>Contact Us</h2>
                     <p>
-                        If you have questions or concerns about this Privacy Policy, please contact us at <a href="mailto:support@siitecch.com">support@siitecch.com</a>.
+                        If you have questions or concerns about this Privacy Policy, please contact us at <a href="mailto:siitecch@gmail.com">siitecch@gmail.com</a>.
                     </p>
                 </div>
 

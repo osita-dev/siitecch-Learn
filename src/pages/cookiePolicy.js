@@ -64,7 +64,7 @@ export default function Cookie() {
 
                     <h2>Contact Us</h2>
                     <p>
-                        If you have any questions about this Cookie Policy, contact us at <a href="mailto:support@siitecch.com">support@siitecch.com</a>.
+                        If you have any questions about this Cookie Policy, contact us at <a href="mailto:siitecch@gmail.com">siitecch@gmail.com</a>.
                     </p>
                 </div>
 

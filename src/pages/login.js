@@ -1,83 +1,111 @@
-import { useState } from "react";
-import { FaEye, FaEyeSlash, FaGoogle } from "react-icons/fa";
-import Header from "../components/header";
-import { Link } from "react-router-dom";
-import { useTheme } from "../context/themeContext";
-import { useForm } from "react-hook-form";
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as Yup from 'yup';
+import React, { useState, useContext } from 'react';
+import { FaEye, FaEyeSlash} from 'react-icons/fa';
+import Header from '../components/header';
+import { Link } from 'react-router-dom';
+import { useTheme } from '../context/themeContext';
+import { AuthContext } from '../context/authContext';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function Login() {
   const { theme } = useTheme();
+  const navigate = useNavigate();
+  const { login, loading } = useContext(AuthContext);
+
+  const [formData, setFormData] = useState({
+    email: '',
+    password: '',
+  });
+
   const [showPassword, setShowPassword] = useState(false);
 
-  // Validation schema using Yup
-  const validationSchema = Yup.object().shape({
-    email: Yup.string().email("Invalid email format").required("Email is required"),
-    password: Yup.string().min(6, "Password must be at least 6 characters").required("Password is required"),
-  });
+  // Handle Input Change
+// Handle Input Change
+const handleInputChange = (e) => {
+  const { name, value } = e.target;
+  setFormData((prevFormData) => ({
+    ...prevFormData,
+    [name]: value.trimStart(), // Prevent leading spaces while typing
+  }));
+};
 
-  // Set up react-hook-form with validation
-  const { register, handleSubmit, formState: { errors } } = useForm({
-    resolver: yupResolver(validationSchema)
-  });
 
-  // Handle form submission
-  const onSubmit = async (data) => {
-    console.log("Form Data: ", data);
-    // You would typically send a request to the backend for login here
-  };
+  // Handle Submit
+// Handle Submit
+const handleSubmit = async (e) => {
+  e.preventDefault();
+
+  // Trim email and password to remove unnecessary spaces
+  const trimmedEmail = formData.email.trim();
+  const trimmedPassword = formData.password.trim();
+
+  if (!trimmedEmail || !trimmedPassword) {
+    toast.error('Both email and password are required');
+    return;
+  }
+
+  try {
+    await login(trimmedEmail, trimmedPassword, navigate); // Call login from AuthContext
+  } catch (error) {
+    console.error('Login error:', error);
+  }
+};
+
+  
 
   return (
     <>
       <Header />
-      <form className={`user ${theme}`} onSubmit={handleSubmit(onSubmit)}>
+      <form className={`user ${theme}`} onSubmit={handleSubmit}>
         <img src="images/login.svg" alt="Login logo" />
-        
+
         {/* Email Input */}
         <input
-          type="text"
+          type="email"
+          name="email"
           placeholder="johndoe@gmail.com"
           className="inputStyle"
-          {...register("email")}
+          value={formData.email}
+          onChange={handleInputChange}
         />
-        {errors.email && <p className="error">{errors.email.message}</p>}
 
         {/* Password Input */}
         <div className="password-container">
           <input
-            type={showPassword ? "text" : "password"}
+            type={showPassword ? 'text' : 'password'}
+            name="password"
             placeholder="Password"
             className="inputStyle"
-            {...register("password")}
+            value={formData.password}
+            onChange={handleInputChange}
           />
-          <button
-            type="button"
-            className="eye"
+          <div
+            className="eye" 
             onClick={() => setShowPassword(!showPassword)}
           >
             {showPassword ? <FaEyeSlash /> : <FaEye />}
-          </button>
+          </div>
         </div>
-        {errors.password && <p className="error">{errors.password.message}</p>}
 
         {/* Submit Button */}
-        <input type="submit" value="Login" className="inputStyle btn" />
+        <input
+          type="submit"
+          value={loading ? 'Logging in...' : 'Login'}
+          className="inputStyle btn"
+          disabled={loading}
+        />
 
         <div className="lines">
-          <div className="line one">
-            <Link to="/register" className="linked">Not Registered?</Link>
-          </div>
+          <Link to="/register" className="linked">Not Registered?</Link>
           <div className="line two">OR</div>
-          <div className="line three">
-            <Link to="/forgot" className="linked">Forgot password?</Link>
-          </div>
+          <Link to="/forgot" className="linked">Forgot password?</Link>
         </div>
 
         {/* Google Login Button */}
-        <button className="inputStyle google">
+        {/* <button className="inputStyle google">
           <FaGoogle /> &nbsp;Sign In with Google
-        </button>
+        </button> */}
       </form>
     </>
   );

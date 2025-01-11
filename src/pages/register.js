@@ -1,87 +1,87 @@
-import React, { useState, useContext } from "react";
-import { FaEye, FaEyeSlash, FaGoogle } from "react-icons/fa";
-import Header from "../components/header";
-import { Link } from "react-router-dom";
-import { useTheme } from "../context/themeContext";
-import authContext from "../context/authContext";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css"; // Toastify styles
+import React, { useState, useContext } from 'react';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import Header from '../components/header';
+import { Link } from 'react-router-dom';
+import { useTheme } from '../context/themeContext';
+import { AuthContext } from '../context/authContext';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function Register() {
   const { theme } = useTheme();
-  const { signUp } = useContext(authContext);
+  const navigate = useNavigate();
+  const { signUp, loading } = useContext(AuthContext);
 
   const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
+    name: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
   });
 
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
 
+
+  // Handle Form Submit
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    // Trim all inputs to remove unnecessary spaces
+    const trimmedName = formData.name.trim();
+    const trimmedEmail = formData.email.trim();
+    const trimmedPassword = formData.password.trim();
+    const trimmedConfirmPassword = formData.confirmPassword.trim();
+
+    // Validation for Full Name
+    if (trimmedName.length < 4) {
+      toast.error('Full Name must be at least 4 characters long');
+      return;
+    }
+
+    // Validation for Email
+    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (!emailPattern.test(trimmedEmail)) {
+      toast.error('Please enter a valid email address');
+      return;
+    }
+
+    // Validation for Password
+    const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    if (!passwordPattern.test(trimmedPassword)) {
+      toast.error(
+        'Password must be at least 8 characters long and include uppercase, lowercase, number, and special character'
+      );
+      return;
+    }
+
+    // Confirm Password Validation
+    if (trimmedPassword !== trimmedConfirmPassword) {
+      toast.error('Passwords do not match');
+      return;
+    }
+
+    // Proceed with signup
+    try {
+      await signUp(trimmedName, trimmedEmail, trimmedPassword, navigate);
+    } catch (error) {
+      console.error('Signup error:', error);
+      toast.error('Failed to register. Please try again.');
+    }
+  };
+
+
+  // Handle Input Change
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: value.trimStart(), // Prevent leading spaces while typing
     }));
   };
 
-  // Email validation regex
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-  const validateForm = () => {
-    const { name, email, password, confirmPassword } = formData;
-    if (!name || !email || !password || !confirmPassword) {
-      toast.error("All fields are required.");
-      return false;
-    }
-    if (!emailRegex.test(email)) {
-      toast.error("Please enter a valid email address.");
-      return false;
-    }
-    if (password !== confirmPassword) {
-      toast.error("Passwords must match.");
-      return false;
-    }
-    if (password.length < 6) {
-      toast.error("Password must be at least 6 characters long.");
-      return false;
-    }
-    return true;
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (!validateForm()) return;
-
-    setIsLoading(true);
-    try {
-      await signUp(formData.name, formData.email, formData.password);
-      toast.success("Sign-Up Successful!");
-      setFormData({
-        name: "",
-        email: "",
-        password: "",
-        confirmPassword: "",
-      });
-    } catch (err) {
-      toast.error(err.message || "An unexpected error occurred.");
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword);
-  };
-
-  const toggleConfirmPasswordVisibility = () => {
-    setShowConfirmPassword(!showConfirmPassword);
-  };
 
   return (
     <>
@@ -89,78 +89,77 @@ export default function Register() {
       <form className={`user ${theme}`} onSubmit={handleSubmit}>
         <img src="images/signup.svg" alt="Register logo" />
 
-        {/* Name Input */}
         <input
           type="text"
           name="name"
-          value={formData.name}
-          onChange={handleInputChange}
           placeholder="Full Name"
           className="inputStyle"
+          value={formData.name}
+          onChange={handleInputChange}
         />
 
-        {/* Email Input */}
         <input
           type="email"
           name="email"
-          value={formData.email}
-          onChange={handleInputChange}
           placeholder="johndoe@gmail.com"
           className="inputStyle"
+          value={formData.email}
+          onChange={handleInputChange}
+
         />
 
-        {/* Password Input */}
+        {/* Password Field */}
         <div className="password-container">
           <input
-            type={showPassword ? "text" : "password"}
+            type={showPassword ? 'text' : 'password'}
             name="password"
-            value={formData.password}
-            onChange={handleInputChange}
             placeholder="Password"
             className="inputStyle"
+            value={formData.password}
+            onChange={handleInputChange}
           />
-          <button type="button" className="eye" onClick={togglePasswordVisibility}>
+          <div
+            className="eye"
+            aria-label="Toggle password visibility"
+            onClick={() => setShowPassword(!showPassword)}
+          >
             {showPassword ? <FaEyeSlash /> : <FaEye />}
-          </button>
+          </div>
         </div>
 
-        {/* Confirm Password Input */}
+        {/* Confirm Password Field */}
         <div className="password-container">
           <input
-            type={showConfirmPassword ? "text" : "password"}
+            type={showConfirmPassword ? 'text' : 'password'}
             name="confirmPassword"
-            value={formData.confirmPassword}
-            onChange={handleInputChange}
             placeholder="Confirm Password"
             className="inputStyle"
+            value={formData.confirmPassword}
+            onChange={handleInputChange}
           />
-          <button type="button" className="eye" onClick={toggleConfirmPasswordVisibility}>
+          <div
+            className="eye"
+            aria-label="Toggle confirm password visibility"
+            onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+          >
             {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
-          </button>
+          </div>
         </div>
 
-        {/* Submit Button */}
         <input
           type="submit"
-          value={isLoading ? "Processing..." : "Register"}
-          className={`inputStyle btn ${isLoading ? "loading" : ""}`}
-          disabled={isLoading}
+          value={loading ? 'Registering...' : 'Register'}
+          className="inputStyle btn"
+          disabled={loading}
         />
 
         <div className="lines">
-          <div className="line one">
-            <Link to="/login" className="linked">
-              Account? Login
-            </Link>
-          </div>
-          <div className="line two">OR</div>
+          <Link to="/login" className="linked">Already have an account? Login</Link>
         </div>
 
-        {/* Google Login Button */}
-        <button type="button" className="inputStyle google">
-          <FaGoogle /> &nbsp; Sign Up with Google
-        </button>
-
+        {/* <button className="inputStyle google">
+          <FaGoogle /> &nbsp;Sign Up with Google
+        </button> */}
         <div className="term">
           <p>
             By signing up you acknowledge that you agree to our{" "}

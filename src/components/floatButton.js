@@ -1,8 +1,8 @@
 import React from "react";
-import { FaShare } from "react-icons/fa6";
+import { IoMdShareAlt } from "react-icons/io";
 
 export default function FloatButton() {
-  const referralLink = "https://siitecch.com"; // Replace with your actual link
+  const referralLink = "https://siitecch-learn.vercel.app"; // Replace with your actual link
 
   // Function to copy the referral link to the clipboard
   const copyToClipboard = () => {
@@ -29,8 +29,9 @@ export default function FloatButton() {
   };
 
   return (
-    <button className="float-button" onClick={shareReferralLink}>
-      <FaShare className="share" />
+    <button className="float-button" onClick={shareReferralLink} >
+
+      <IoMdShareAlt className="share" />
     </button>
   );
 }

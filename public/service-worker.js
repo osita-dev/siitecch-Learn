@@ -12,7 +12,6 @@ self.addEventListener('install', (event) => {
           '/images/programing.svg',
           '/images/signup.svg',
           '/styles.css',
-          '/scripts.js',
           '/api/languages.json',  // The JSON endpoint you're using
         ]);
       })

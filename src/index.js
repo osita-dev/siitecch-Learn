@@ -3,6 +3,8 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 import './index.css';
+import './adminStyle.css';
+
 import { ThemeProvider } from './context/themeContext';
 import { AuthProvider } from './context/authContext'; // New auth provider
 import { CookieProvider } from './context/cookieContext'; // Import the new Cookie Provider
@@ -24,7 +26,7 @@ if ('serviceWorker' in navigator) {
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
+  
     <Router> {/* Wrap everything with BrowserRouter here */}
       <ThemeProvider>
         <CookieProvider>
@@ -34,5 +36,4 @@ root.render(
         </CookieProvider>
       </ThemeProvider>
     </Router>
-  </React.StrictMode>
 );
