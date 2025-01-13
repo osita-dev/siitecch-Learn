@@ -35,14 +35,9 @@ export default function SinglePage() {
 
     if (loading) {
         return (
-            <div className="loading-container">
-                <img
-                    src="/images/siitecch.png"
-                    alt="Loading..."
-                    className="loading-image"
-                />
-                <p>Loading...</p>
-            </div>
+            <div className="loader">
+            <div className="load">SIITECCH</div>
+          </div>
         );
     }
 
