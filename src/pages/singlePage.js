@@ -37,13 +37,8 @@ export default function SinglePage() {
     if (loading) {
         return (
             <div className="loader">
-<<<<<<< HEAD
             <div className="load">SIITECCH</div>
           </div>
-=======
-                <div className="load">SIITECCH</div>
-            </div>
->>>>>>> 8853562 (added more functions)
         );
     }
 
