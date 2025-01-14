@@ -12,16 +12,9 @@ import Dashboard from './pages/dashboard';
 import PublicRoute from './utils/publicRoutes';
 import Unauthorized from './pages/unauthorise';
 import ProtectedAdminRoute from './utils/ProtectedAdminRoute';
-import CkEditor from './pages/ckeditor';
-
-
-
-
-
+import AdminCategoriesPage from './pages/admin/admincategory';
 // import FeedbackPopup from './components/feedback';
-//<FeedbackPopup/> *
 //<TrackView />
-
 // Lazy-loaded components
 const GoogleCallback = lazy(() => import('./components/GoogleCallback'));
 const HomePage = lazy(() => import('./pages/homePage'));
@@ -39,11 +32,9 @@ const PageNotFound = lazy(() => import('./pages/pageNotFound'));
 const Faq = lazy(() => import('./pages/faq'));
 // admin section
 const AdminHome = lazy(() => import('./pages/admin/adminHome'));
-const Users = lazy(() => import('./pages/admin/users'));
 const Languages = lazy(() => import('./pages/admin/language'));
 const Categories = lazy(() => import('./pages/admin/categories'));
 const Examples = lazy(() => import('./pages/admin/examples'));
-const AddUsers = lazy(() => import('./pages/admin/addUser'));
 const UpdateLanguage = lazy(() => import('./pages/admin/updateLanguage'));
 const UpdateCategory = lazy(() => import('./pages/admin/updateCategory'));
 const UpdateExample = lazy(() => import('./pages/admin/updateExample'));
@@ -59,6 +50,7 @@ function App() {
   return (
     <>
       <ScrollToTop />
+      {/* <FeedbackPopup/> */}
       <CookieConsentPopup />
       <ToastContainer position="top-right" autoClose={3000} />
       <Suspense
@@ -77,7 +69,6 @@ function App() {
           <Route path="/terms" element={<Terms />} />
           <Route path="/developer" element={<AboutDeveloper />} />
           <Route path="/about" element={<About />} />
-          <Route path="/ck" element={<CkEditor />} />
           <Route path="/support" element={<Support />} />
           <Route path="/language/:slug" element={<SinglePage />} />
           <Route path="/login" element={<PublicRoute><Login /></PublicRoute>} />
@@ -92,14 +83,15 @@ function App() {
 
           {/* Admin Protected Routes */}
           <Route path="/admin*" element={ <ProtectedAdminRoute allowedRoles={['admin']}><AdminHome /></ProtectedAdminRoute>}/>
-          <Route path="/admin/users" element={<ProtectedAdminRoute allowedRoles={['admin']}><Users /></ProtectedAdminRoute>}/>
           <Route path="/admin/languages" element={<ProtectedAdminRoute allowedRoles={['admin']}><Languages /></ProtectedAdminRoute>}/>
           <Route path="/admin/categories" element={<ProtectedAdminRoute allowedRoles={['admin']}><Categories /></ProtectedAdminRoute>}/>
           <Route path="/admin/examples" element={<ProtectedAdminRoute allowedRoles={['admin']}><Examples /></ProtectedAdminRoute>}/>
-          <Route path="/admin/addUser" element={<ProtectedAdminRoute allowedRoles={['admin']}><AddUsers /></ProtectedAdminRoute>}/>
           <Route path="/admin/updateLanguage" element={<ProtectedAdminRoute allowedRoles={['admin']}><UpdateLanguage /></ProtectedAdminRoute>}/>
           <Route path="/admin/updateCategory" element={<ProtectedAdminRoute allowedRoles={['admin']}><UpdateCategory /></ProtectedAdminRoute>}/>
           <Route path="/admin/updateExample" element={<ProtectedAdminRoute allowedRoles={['admin']}><UpdateExample /></ProtectedAdminRoute>}/>
+          {/*  */}
+          <Route path="/admin/admincategory" element={<ProtectedAdminRoute allowedRoles={['admin']}><AdminCategoriesPage/></ProtectedAdminRoute>}/>
+        
         </Routes>
       </Suspense>
     </>

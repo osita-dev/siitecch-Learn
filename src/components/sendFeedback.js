@@ -5,6 +5,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 export default function SendFeedBack() {
   const { theme } = useTheme();
+  const [loading, setLoading] = useState(false);
 
   // State for form data
   const [formData, setFormData] = useState({
@@ -44,6 +45,7 @@ export default function SendFeedBack() {
   // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
 
     try {
       const response = await fetch("https://siitecch.onrender.com/api/feedback", {
@@ -113,14 +115,17 @@ export default function SendFeedBack() {
                 onChange={handleChange}
                 required
               />
-              <p style={{ fontSize: "0.9rem", color: "#666",padding: "0px 5px"}}>
+              <p style={{ fontSize: "0.9rem", color: "#666", padding: "0px 5px" }}>
                 {charCount}/{MAX_CHARS} characters remaining
               </p>
-              <input
+              
+              <button
                 type="submit"
-                value="Send Message"
                 className="inputStyle btn"
-              />
+                disabled={loading}
+              >
+                {loading ? "Sending..." : "Send Message"}
+              </button>
             </form>
           </div>
         </section>

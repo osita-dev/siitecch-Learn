@@ -13,7 +13,7 @@ export default function FeedbackPopup() {
             // Timer to show the popup after 5 minutes (300000 ms)
             const timer = setTimeout(() => {
                 setShowPopup(true);
-            }, 180000); // 5 minutes
+            }, 3600000); // 1 hour
 
             // Cleanup the timer if the user leaves the page
             return () => clearTimeout(timer);

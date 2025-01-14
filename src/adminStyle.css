@@ -4,6 +4,7 @@
   --footerbg: #E2E8F0;
   --footerbtn: #F8FAFC;
 }
+
 /* Admin Home Container */
 .admin-container {
   background-color: var(--bglight);
@@ -96,169 +97,78 @@
     padding: 1rem;
   }
 }
-/* ========================= */
-/*       General Styles      */
-/* ========================= */
-.add-language-form {
-  max-width: 700px;
-  margin: 40px auto;
-  padding: 30px;
-  background-color: #ffffff;
-  border: 1px solid #e0e0e0;
-  border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  font-family: 'Arial', sans-serif;
-}
 
-.add-language-form h1 {
-  text-align: center;
-  font-size: 2rem;
-  font-weight: bold;
-  margin-bottom: 25px;
-  color: #2c3e50;
-}
-
-/* ========================= */
-/*        Form Styles        */
-/* ========================= */
-.add-language-form form {
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-}
-
-.form-group {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.form-group label {
-  font-size: 1rem;
-  font-weight: 500;
-  color: #444;
-}
-
-.form-group input {
+/* General Styling for the Category Form */
+.category-form {
+  margin: 10px;
   padding: 10px;
-  font-size: 0.95rem;
-  border: 1px solid #d1d1d1;
-  border-radius: 6px;
-  background-color: #fafafa;
-  transition: border-color 0.3s ease-in-out;
+  display: flex;
+  flex-direction: column;
 }
 
-.form-group input:focus {
-  outline: none;
-  border-color: #4a90e2;
-  box-shadow: 0 0 4px rgba(74, 144, 226, 0.3);
-}
-
-/* ========================= */
-/*     Draft.js Editor       */
-/* ========================= */
-.form-group .DraftEditor-root {
-  border: 1px solid #d1d1d1;
-  border-radius: 6px;
-  padding: 12px;
-  min-height: 180px;
-  background: #ffffff;
-  font-size: 0.95rem;
-  overflow-y: auto;
-  transition: border-color 0.3s ease-in-out;
-}
-
-.form-group .DraftEditor-root:focus-within {
-  border-color: #4a90e2;
-  box-shadow: 0 0 4px rgba(74, 144, 226, 0.3);
-}
-
-/* ========================= */
-/*      Submit Button        */
-/* ========================= */
-button[type="submit"] {
-  margin-top: 15px;
-  padding: 12px 0;
-  font-size: 1rem;
-  font-weight: 600;
-  color: #fff;
-  background-color: #4a90e2;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
+.category-form h1 {
+  font-size: 16px;
   text-align: center;
-  transition: background-color 0.3s ease-in-out;
+
+}
+.category-form form {
+  display: flex;
+  flex-direction: column;
+  margin: 10px auto;
 }
 
-button[type="submit"]:hover {
-  background-color: #357abd;
+.category-form form label {
+  display: block;
+  margin: 10px 0px;
 }
 
-/* ========================= */
-/*   Desktop Adjustment      */
-/* ========================= */
+.category-form form .form-details {
+  display: flex;
+  width: 100%;
+  margin: 0 auto;
+  padding: 16px 10px;
+  outline: none;
+  border: none;
+}
+.category-form form .form-details.vid{
+  margin: 14px 0px;
+}
+
+.form-details.btn{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  border: none;
+  color: var(--bglight);
+  background-color: var(--lightblue);
+}
+.form-details {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  margin: 0 auto;
+  padding: 16px 10px;
+  outline: none;
+  border: none;
+}
+/* .category-form form .form-details.quill {
+  font-size: 20px;
+} */
+
+/* Quill Editor */
+.quill-editor {
+
+  border: 1px solid var(--footerbg);
+  margin-top: 10px;
+}
+
+
+
+/* Desktop */
 @media (min-width: 1024px) {
-  .form-group input {
-    max-width: 900px; /* Increase the input width */
-    width: 100%;
-    padding: 12px; /* Slightly increase padding */
-    font-size: 1rem;
-  }
-}
 
-/* ========================= */
-/*   Responsive Adjustments  */
-/* ========================= */
-@media (max-width: 768px) {
-  .add-language-form {
-    padding: 20px;
-  }
-
-  .add-language-form h1 {
-    font-size: 1.7rem;
-  }
-
-  .form-group label {
-    font-size: 0.9rem;
-  }
-
-  .form-group input {
-    font-size: 0.9rem;
-  }
-
-  .form-group .DraftEditor-root {
-    min-height: 150px;
-  }
-
-  button[type="submit"] {
-    font-size: 0.9rem;
-    padding: 10px 0;
-  }
-}
-
-@media (max-width: 480px) {
-  .add-language-form {
-    padding: 15px;
-  }
-
-  .add-language-form h1 {
-    font-size: 1.5rem;
-  }
-
-  .form-group label {
-    font-size: 0.85rem;
-  }
-
-  .form-group input {
-    font-size: 0.85rem;
-  }
-
-  .form-group .DraftEditor-root {
-    min-height: 130px;
-  }
-
-  button[type="submit"] {
-    font-size: 0.85rem;
-    padding: 8px 0;
+  .quill-editor {
+    height: 500px;
   }
 }

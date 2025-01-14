@@ -4,6 +4,7 @@ import { useTheme } from "../context/themeContext";
 import SingleHeader from "../components/singleHeader";
 import Footer from "../components/footer";
 import { FaArrowCircleLeft } from "react-icons/fa";
+import DOMPurify from "dompurify";
 import Card from "../components/card";
 
 export default function SinglePage() {
@@ -36,8 +37,13 @@ export default function SinglePage() {
     if (loading) {
         return (
             <div className="loader">
+<<<<<<< HEAD
             <div className="load">SIITECCH</div>
           </div>
+=======
+                <div className="load">SIITECCH</div>
+            </div>
+>>>>>>> 8853562 (added more functions)
         );
     }
 
@@ -62,12 +68,12 @@ export default function SinglePage() {
                 {/* Introduction Section */}
                 <div className="introduction">
                     <h1>{language?.name}</h1>
-                    <div className="javaScript">
-                        <p></p>
-                    </div>
+                    <div
+                        className="javaScript"
+                        dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(language?.description) }}
+                    ></div>
                 </div>
 
-                {/* Single Container Section */}
                 <section className="single-container">
                     {language?.categories?.map((category) => (
                         <Card
@@ -76,15 +82,25 @@ export default function SinglePage() {
                             youtubeUrl={category.video_link}
                         >
                             <div className="category-content">
-                                <p>{category.content}</p>
+                                <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(category.content), }}
+                                ></div>
                                 {category.examples?.map((example, index) => (
                                     <div key={index}>
-                                        <h4>{example.title}</h4>
-                                        <div><code>{example.code}</code></div>
-                                        <p>{example.description}</p>
+                                        <h4 dangerouslySetInnerHTML={{
+                                            __html: DOMPurify.sanitize(example.title),
+                                        }}></h4>
+                                        <div><code dangerouslySetInnerHTML={{
+                                            __html: DOMPurify.sanitize(example.code),
+                                        }}></code></div>
+                                        <div
+                                            dangerouslySetInnerHTML={{
+                                                __html: DOMPurify.sanitize(example.description),
+                                            }}
+                                        ></div>
                                     </div>
                                 ))}
                             </div>
+
                         </Card>
                     ))}
                 </section>
