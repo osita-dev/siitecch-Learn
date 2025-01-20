@@ -8,17 +8,17 @@
       "type": "image/x-icon"
     },
     {
-      "src": "images/siitecch_1.png",
+      "src": "images/siitecch.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "images/siitecch_1.png",
+      "src": "images/siitecch.png",
       "sizes": "512x512",
       "type": "image/png"
     },
     {
-      "src": "images/siitecch_1.png",
+      "src": "images/siitecch.png",
       "sizes": "1024x1024",
       "type": "image/png",
       "purpose": "any maskable"
@@ -36,7 +36,7 @@
   "dir": "ltr",
   "screenshots": [
     {
-      "src": "images/screenshot-homepage.png",
+      "src": "images/siitecch.png",
       "sizes": "1280x720",
       "type": "image/png",
       "description": "Siitecch Homepage"
