@@ -13,6 +13,7 @@ import PublicRoute from './utils/publicRoutes';
 import Unauthorized from './pages/unauthorise';
 import ProtectedAdminRoute from './utils/ProtectedAdminRoute';
 import AdminCategoriesPage from './pages/admin/admincategory';
+import Ping from './components/ping';
 // import FeedbackPopup from './components/feedback';
 //<TrackView />
 // Lazy-loaded components
@@ -49,6 +50,7 @@ function App() {
 
   return (
     <>
+    <Ping />
       <ScrollToTop />
       {/* <FeedbackPopup/> */}
       <CookieConsentPopup />
