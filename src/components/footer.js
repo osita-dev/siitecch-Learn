@@ -1,4 +1,3 @@
-
 import { useTheme } from "../context/themeContext";
 import { Link } from "react-router-dom";
 import {
@@ -117,7 +116,7 @@ export default function Footer() {
         setDeferredPrompt(null);
       });
     } else {
-      alert("App installation is not available at the moment.");
+       alert("App Already Installed");
     }
   };
 
