@@ -622,7 +622,7 @@ button.install-app:hover {
 }
 footer button.install-app.disabled {
   background-color: var(--footerbtn);
-  color: var(--footerbg);
+  color: var(--gray);
   pointer-events: none;
   cursor: not-allowed;
   opacity: 0.6;
