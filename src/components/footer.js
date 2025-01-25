@@ -13,20 +13,23 @@ import { useState, useEffect } from "react";
 
 export default function Footer() {
   const { theme } = useTheme();
+  // Social media and external links
   const youTube = "https://youtube.com/@siitecch?si=ngX7lFMF0IWnU8X0";
   const faceBook = "https://web.facebook.com/profile.php?id=100076062997043";
   const Twitter = "https://x.com/siitecch";
   const linkedIn = "https://www.linkedin.com/in/christopher-osita-46b4b6202/";
   const GitHub = "https://github.com/osita-dev";
 
+  // State for PWA install prompt
   const [deferredPrompt, setDeferredPrompt] = useState(null);
   const [isAppInstalled, setIsAppInstalled] = useState(false);
 
+  // Check if the app is installed
   const checkAppInstallation = () => {
-    // Check for standalone mode
     const isStandalone =
       window.matchMedia("(display-mode: standalone)").matches ||
       navigator.standalone;
+
     if (isStandalone) {
       setIsAppInstalled(true);
       localStorage.setItem("isAppInstalled", "true");
@@ -36,13 +39,61 @@ export default function Footer() {
     }
   };
 
+  // Browser compatibility check
+  const checkBrowserCompatibility = () => {
+    const userAgent = navigator.userAgent.toLowerCase();
+
+    if (userAgent.includes("iphone") || userAgent.includes("ipad")) {
+      alert("PWA installation is not available on iOS at the moment.");
+      return false;
+    }
+
+    if (userAgent.includes("chrome")) {
+      const chromeVersion = parseInt(
+        userAgent.match(/chrome\/(\d+)/)?.[1] || "0",
+        10
+      );
+      if (chromeVersion < 76) {
+        alert(
+          "Your Chrome browser version is outdated. Please update to the latest version to install the app."
+        );
+        return false;
+      }
+      return true;
+    }
+
+    alert("Your browser is not supported for PWA installation.");
+    return false;
+  };
+
+  // Handle PWA installation
+  const handleInstall = () => {
+    if (!checkBrowserCompatibility()) return;
+
+    if (deferredPrompt) {
+      deferredPrompt.prompt();
+      deferredPrompt.userChoice.then((choiceResult) => {
+        if (choiceResult.outcome === "accepted") {
+          console.log("User accepted the install prompt");
+          setIsAppInstalled(true);
+          localStorage.setItem("isAppInstalled", "true");
+        } else {
+          console.log("User dismissed the install prompt");
+        }
+        setDeferredPrompt(null);
+      });
+    } else {
+      alert("App installation is not available at the moment.");
+    }
+  };
+
+  // Effect to handle PWA events
   useEffect(() => {
-    // Initial check for app installation
     checkAppInstallation();
 
     const handleBeforeInstallPrompt = (e) => {
-      e.preventDefault(); // Prevent the default Chrome install prompt
-      setDeferredPrompt(e); // Save the event for triggering later
+      e.preventDefault();
+      setDeferredPrompt(e);
     };
 
     const handleAppInstalled = () => {
@@ -51,14 +102,12 @@ export default function Footer() {
       localStorage.setItem("isAppInstalled", "true");
     };
 
-    // Event listeners
-    window.addEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
-    window.addEventListener("appinstalled", handleAppInstalled);
-
-    // Periodic re-check on page focus
     const handleFocus = () => {
       checkAppInstallation();
     };
+
+    window.addEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
+    window.addEventListener("appinstalled", handleAppInstalled);
     window.addEventListener("focus", handleFocus);
 
     return () => {
@@ -70,25 +119,6 @@ export default function Footer() {
       window.removeEventListener("focus", handleFocus);
     };
   }, []);
-
-  const handleInstall = () => {
-    if (deferredPrompt) {
-      deferredPrompt.prompt(); // Show the install prompt
-      deferredPrompt.userChoice.then((choiceResult) => {
-        if (choiceResult.outcome === "accepted") {
-          console.log("User accepted the install prompt");
-          setIsAppInstalled(true);
-          localStorage.setItem("isAppInstalled", "true");
-        } else {
-          console.log("User dismissed the install prompt");
-        }
-        setDeferredPrompt(null); // Reset after user interaction
-      });
-    } else {
-      alert("App installation is not available at the moment.");
-    }
-  };
-
   return (
     <>
       <footer className={`footer ${theme}`}>
@@ -189,7 +219,7 @@ export default function Footer() {
             <button
               className="install-app"
               onClick={handleInstall}
-              disabled={isAppInstalled} // Disable if app is already installed
+              disabled={isAppInstalled}
             >
               {isAppInstalled ? "App Already Installed" : "Download App"}
             </button>
