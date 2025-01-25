@@ -13,18 +13,15 @@ import { useState, useEffect } from "react";
 
 export default function Footer() {
   const { theme } = useTheme();
-  // Social media and external links
   const youTube = "https://youtube.com/@siitecch?si=ngX7lFMF0IWnU8X0";
   const faceBook = "https://web.facebook.com/profile.php?id=100076062997043";
   const Twitter = "https://x.com/siitecch";
   const linkedIn = "https://www.linkedin.com/in/christopher-osita-46b4b6202/";
   const GitHub = "https://github.com/osita-dev";
 
-  // State for PWA install prompt
   const [deferredPrompt, setDeferredPrompt] = useState(null);
   const [isAppInstalled, setIsAppInstalled] = useState(false);
 
-  // Check if the app is installed
   const checkAppInstallation = () => {
     const isStandalone =
       window.matchMedia("(display-mode: standalone)").matches ||
@@ -39,7 +36,6 @@ export default function Footer() {
     }
   };
 
-  // Browser compatibility check
   const checkBrowserCompatibility = () => {
     const userAgent = navigator.userAgent.toLowerCase();
 
@@ -66,28 +62,6 @@ export default function Footer() {
     return false;
   };
 
-  // Handle PWA installation
-  const handleInstall = () => {
-    if (!checkBrowserCompatibility()) return;
-
-    if (deferredPrompt) {
-      deferredPrompt.prompt();
-      deferredPrompt.userChoice.then((choiceResult) => {
-        if (choiceResult.outcome === "accepted") {
-          console.log("User accepted the install prompt");
-          setIsAppInstalled(true);
-          localStorage.setItem("isAppInstalled", "true");
-        } else {
-          console.log("User dismissed the install prompt");
-        }
-        setDeferredPrompt(null);
-      });
-    } else {
-      alert("App installation is not available at the moment.");
-    }
-  };
-
-  // Effect to handle PWA events
   useEffect(() => {
     checkAppInstallation();
 
@@ -119,6 +93,29 @@ export default function Footer() {
       window.removeEventListener("focus", handleFocus);
     };
   }, []);
+
+  const handleInstall = () => {
+    if (!checkBrowserCompatibility()) {
+      return;
+    }
+
+    if (deferredPrompt) {
+      deferredPrompt.prompt();
+      deferredPrompt.userChoice.then((choiceResult) => {
+        if (choiceResult.outcome === "accepted") {
+          console.log("User accepted the install prompt");
+          setIsAppInstalled(true);
+          localStorage.setItem("isAppInstalled", "true");
+        } else {
+          console.log("User dismissed the install prompt");
+        }
+        setDeferredPrompt(null);
+      });
+    } else {
+      alert("App installation is not available at the moment.");
+    }
+  };
+
   return (
     <>
       <footer className={`footer ${theme}`}>
@@ -217,7 +214,7 @@ export default function Footer() {
               </Link>
             </div>
             <button
-              className="install-app"
+              className={`install-app ${isAppInstalled ? "disabled" : ""}`}
               onClick={handleInstall}
               disabled={isAppInstalled}
             >
@@ -233,6 +230,15 @@ export default function Footer() {
           &copy; {new Date().getFullYear()} siitecch, All rights reserved.
         </div>
       </footer>
+      <style jsx>{`
+        .install-app.disabled {
+          background-color: #ddd;
+          color: #aaa;
+          pointer-events: none;
+          cursor: not-allowed;
+          opacity: 0.6;
+        }
+      `}</style>
     </>
   );
 }
