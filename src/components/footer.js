@@ -1,3 +1,4 @@
+
 import { useTheme } from "../context/themeContext";
 import { Link } from "react-router-dom";
 import {
@@ -63,6 +64,10 @@ export default function Footer() {
   };
 
   useEffect(() => {
+    // Check `localStorage` for installation state
+    const storedInstallationState = localStorage.getItem("isAppInstalled");
+    setIsAppInstalled(storedInstallationState === "true");
+
     checkAppInstallation();
 
     const handleBeforeInstallPrompt = (e) => {
@@ -230,15 +235,6 @@ export default function Footer() {
           &copy; {new Date().getFullYear()} siitecch, All rights reserved.
         </div>
       </footer>
-      <style jsx>{`
-        .install-app.disabled {
-          background-color: #ddd;
-          color: #aaa;
-          pointer-events: none;
-          cursor: not-allowed;
-          opacity: 0.6;
-        }
-      `}</style>
     </>
   );
 }
