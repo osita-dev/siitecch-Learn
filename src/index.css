@@ -620,7 +620,7 @@ footer button.install-app{
 button.install-app:hover {
   background-color: #0056b3;
 }
-.install-app.disabled {
+footer button.install-app.disabled {
   background-color: var(--footerbtn);
   color: var(--footerbg);
   pointer-events: none;
