@@ -64,7 +64,7 @@ const Categories = () => {
         }
 
         try {
-            const response = await fetch(`http://localhost:5000/api/languages/${selectedLanguage}/categories`, {
+            const response = await fetch(`https://siitecch.onrender.com/api/languages/${selectedLanguage}/categories`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
