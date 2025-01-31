@@ -55,7 +55,7 @@ export default function Ack() {
                     </div>
                     <div className="feature_box three">
                         <div className="test_image">
-                            <img src="https://media.licdn.com/dms/image/v2/D4D03AQEKqAJXtxT05Q/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1733003547293?e=1739404800&v=beta&t=uyCnDOIAJscpmR-ISWJo9pnl5ODGSCgi6Z1JoCZOsVE" alt="Odii Daniel" />
+                            <img src="https://media.licdn.com/dms/image/v2/D4D03AQEi6qePoI5vgw/profile-displayphoto-shrink_100_100/B4DZS4FnghHAAU-/0/1738255270667?e=1743638400&v=beta&t=duXeNLQC889Bp9ih0385lLf7WF8RPVccqp_GtvyWC74" alt="Odii Daniel" />
                             <div className="image_details">
                                 <h2>Odii Daniel</h2>
                                 <p>Backend developer • Building SAAS for individuals, startups and organizations</p>
