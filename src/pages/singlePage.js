@@ -40,7 +40,7 @@ export default function SinglePage() {
                 console.log("Fetched language from API and cached");
             } catch (error) {
                 console.error("Error:", error.message);
-                setErrorMessage("Failed to fetch language details.");
+                setErrorMessage("Content Coming Soon...!");
             } finally {
                 setLoading(false);
             }
