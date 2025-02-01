@@ -49,13 +49,13 @@ export default function SinglePage() {
         fetchLanguage();
     }, [slug]);
 
-    // if (loading) {
-    //     return (
-    //         <div className="loadertotal">
-    //             <div className="loadtotal"></div>
-    //         </div>
-    //     );
-    // }
+    if (loading) {
+        return (
+            <div className="loadertotal">
+                <div className="loadtotal"></div>
+            </div>
+        );
+    }
 
     if (errorMessage) {
         return (
