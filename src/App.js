@@ -58,7 +58,7 @@ function App() {
       <Suspense
         fallback={
           <div className="loadertotal">
-            <div className="loadtotal">SIITECCH</div>
+            <div className="loadtotal"></div>
           </div>
         }
       >
