@@ -112,13 +112,6 @@ header .logo h2 {
   font-weight: 700;
 }
 
-div.loadtotal {
-  font-size: 25px;
-  color: var(--lightblue);
-  font-family: "Moirai One", system-ui;
-  font-weight: 700;
-}
-
 div.loadertotal {
   position: fixed;
   top: 0;
@@ -131,6 +124,28 @@ div.loadertotal {
   justify-content: center;
   z-index: 1000;
 }
+
+
+.loadertotal .loadtotal {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: inline-block;
+  border-top: 3px solid var(--lightblue);
+  border-right: 3px solid transparent;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+} 
+
 
 header .social-handle {
   display: flex;
