@@ -52,7 +52,7 @@ export default function SinglePage() {
     if (loading) {
         return (
             <div className="loadertotal">
-                <div className="loadtotal">SIITECCH</div>
+                <div className="loadtotal"></div>
             </div>
         );
     }
