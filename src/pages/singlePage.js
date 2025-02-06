@@ -7,7 +7,7 @@ import { FaArrowCircleLeft } from "react-icons/fa";
 import DOMPurify from "dompurify";
 import Card from "../components/card";
 import { storeData, getData } from "../utils/indexedDB"; // Import IndexedDB utility functions
-
+import PopupEditor from "../components/popEditor";
 export default function SinglePage() {
     const { theme } = useTheme();
     const { slug } = useParams();
@@ -122,6 +122,7 @@ export default function SinglePage() {
                 </section>
             </section>
             <Footer />
+        <PopupEditor/>
         </>
     );
 }
