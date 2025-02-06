@@ -55,7 +55,7 @@ const PopupEditor = () => {
                 style={{
                     position: "fixed",
                     bottom: "20px",
-                    right: "20px",
+                    right: "10px",
                     background: "#007bff",
                     color: "#fff",
                     border: "none",
