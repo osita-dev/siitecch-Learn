@@ -5,7 +5,7 @@ const Ping = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       // Ping your backend every 5 minutes to keep the DB alive
-      fetch("http://localhost:5000/api/ping")
+      fetch("https://siitecch.onrender.com/api/ping")
         .then((response) => response.text())
         .then((data) => {
           console.log(data); // Logs "Database connection is active"
@@ -13,7 +13,7 @@ const Ping = () => {
         .catch((error) => {
           console.error("Error pinging database:", error);
         });
-    }, 2 * 60 * 1000); // 2 minutes in milliseconds
+    }, 4 * 60 * 1000); // 2 minutes in milliseconds
 
     // Clean up the interval on unmount
     return () => clearInterval(interval);
