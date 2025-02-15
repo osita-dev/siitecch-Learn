@@ -8,7 +8,7 @@ export default function AboutDeveloper() {
             <Header />
             <section className="privacy dev" style={{ marginTop: "20px" }}>
                 <img
-                     src="images/christopher-Osita.jpg"
+                     src="images/christopher-osita.jpg"
                     alt="Christopher_Osita_picture"
 
                     
