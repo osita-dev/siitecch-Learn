@@ -16,7 +16,7 @@
       "purpose": "any"
     },
     {
-      "src": "images/siitecch.png",
+      "src": "iconx/android-chrome-maskable-512x512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"
@@ -28,7 +28,7 @@
       "purpose": "maskable"
     },
     {
-      "src": "images/siitecch.png",
+      "src": "iconx/android-chrome-maskable-512x515.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
