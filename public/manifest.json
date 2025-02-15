@@ -1,0 +1,106 @@
+{
+  "id": "/",
+  "short_name": "Siitecch",
+  "name": "Learn to Code",
+  "icons": [
+    {
+      "src": "images/favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon",
+      "purpose": "any"
+    },
+    {
+      "src": "images/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "images/siitecch.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "iconx/android-chrome-maskable-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "iconx/android-chrome-maskable-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#3B82F6",
+  "background_color": "#F1F5F9",
+  "description": "Siitecch is a platform for aspiring developers to master full-stack JavaScript development with a step-by-step guide from frontend to backend.",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "categories": ["education", "technology", "development"],
+  "lang": "en",
+  "dir": "ltr",
+  "screenshots": [
+    {
+      "src": "images/screenshot-homepage.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "description": "Siitecch Homepage"
+    },
+    {
+      "src": "images/screenshot-dashboard.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "description": "Siitecch Dashboard"
+    },
+    {
+      "src": "images/siitecch.png",
+      "sizes": "1280x1280",
+      "type": "image/png"
+    },
+    {
+      "src": "images/screenshot-courses.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "description": "Siitecch Courses Page"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Siitecch",
+      "short_name": "Siitecch",
+      "description": "Jump right into Siitecch learning content",
+      "url": "/index",
+      "icons": [
+        {
+          "src": "images/shortcuts.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    }
+  ],
+  "launch_handler": {
+    "route_to": "new-client",
+    "navigate_existing_client": "always",
+    "client_mode": "always"
+  },
+  "background_sync": {
+    "periodic_sync": {
+      "sync_interval": 86400
+    },
+    "sync_on_reconnect": true
+  },
+  "push_notifications": {
+    "enabled": true,
+    "description": "Enable push notifications even when the app is not running"
+  },
+  "iarc_rating_id": "12345",
+  "scope_extensions": ["/extended", "/extra"],
+  "related_applications": [],
+  "prefer_related_applications": false
+}

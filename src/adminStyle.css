@@ -1,0 +1,241 @@
+:root {
+  --bglight: #F1F5F9;
+  --lightblue: #3B82F6;
+  --footerbg: #E2E8F0;
+  --footerbtn: #F8FAFC;
+}
+
+/* Admin Home Container */
+.admin-container {
+  background-color: var(--bglight);
+  min-height: 100vh;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+/* Admin Content Wrapper */
+.admin-content {
+  width: 100%;
+  max-width: 1200px;
+  text-align: center;
+}
+
+/* Admin Title */
+.admin-title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+  color: var(--lightblue);
+}
+
+/* Admin Cards Grid */
+.admin-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  justify-content: center;
+  align-items: stretch;
+}
+
+/* Individual Admin Card */
+.admin-card {
+  background-color: var(--footerbtn);
+  border: 1px solid var(--footerbg);
+  border-radius: 8px;
+  padding: 1.5rem;
+  text-align: center;
+  font-weight: 600;
+  color: var(--lightblue);
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.admin-card h3 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.admin-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .admin-container {
+    padding: 1rem;
+  }
+
+  .admin-title {
+    font-size: 1.8rem;
+  }
+
+  .admin-cards {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+  }
+
+  .admin-card h3 {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .admin-title {
+    font-size: 1.5rem;
+  }
+
+  .admin-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-card {
+    padding: 1rem;
+  }
+}
+
+/* General Styling for the Category Form */
+.category-form {
+  margin: 10px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.category-form h1 {
+  font-size: 16px;
+  text-align: center;
+
+}
+.category-form form {
+  display: flex;
+  flex-direction: column;
+  margin: 10px auto;
+}
+
+.category-form form label {
+  display: block;
+  margin: 10px 0px;
+}
+
+.category-form form .form-details {
+  display: flex;
+  width: 100%;
+  margin: 0 auto;
+  padding: 16px 10px;
+  outline: none;
+  border: none;
+}
+.category-form form .form-details.vid{
+  margin: 14px 0px;
+}
+
+.form-details.btn{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  border: none;
+  color: var(--bglight);
+  background-color: var(--lightblue);
+}
+.form-details {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  margin: 0 auto;
+  padding: 16px 10px;
+  outline: none;
+  border: none;
+}
+/* .category-form form .form-details.quill {
+  font-size: 20px;
+} */
+
+/* Quill Editor */
+.quill-editor {
+
+  border: 1px solid var(--footerbg);
+  margin-top: 10px;
+}
+
+
+
+/* Desktop */
+@media (min-width: 1024px) {
+
+  .quill-editor {
+    height: 500px;
+  }
+}
+
+
+.category-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+}
+
+.form-details {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.category-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.category-card {
+  background: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 15px;
+  text-align: center;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out;
+}
+
+.category-card:hover {
+  transform: scale(1.05);
+}
+
+.category-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.edit-btn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.edit-btn:hover {
+  background-color: #0056b3;
+}
+
+header.navbar .admin{
+  display: flex;
+  justify-content: space-between;
+}
+header.navbar .admin h2{
+  margin: 10px;
+  color: #fff;
+}
