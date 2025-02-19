@@ -7,7 +7,7 @@ import { FaArrowCircleLeft } from "react-icons/fa";
 import DOMPurify from "dompurify";
 import Card from "../components/card";
 import { storeData, getData } from "../utils/indexedDB";
-import AdsterraBanner from "../components/adsterra";
+import AdsterraBanner from "../components/adsterra"; // ✅ Fixed import name
 const PopupEditor = lazy(() => import("../components/popEditor"));
 
 export default function SinglePage() {
@@ -83,54 +83,58 @@ export default function SinglePage() {
       <section className={`singleDisplay ${theme}`}>
         <div className="introduction">
           <h1>{language?.name}</h1>
-          <div className="intro-desc" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(language?.description) }}></div>
+          <div
+            className="intro-desc"
+            dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(language?.description) }}
+          ></div>
         </div>
 
-        {/* ✅ Adsterra Banner Placement */}
-      <section className="single-container">
-    {language?.categories?.map((category, index) => (
-        <React.Fragment key={category.id}>
-            <Card title={category.name} youtubeUrl={category.video_link}>
+        {/* ✅ Main Content */}
+        <section className="single-container">
+          {language?.categories?.map((category, index) => (
+            <React.Fragment key={category.id}>
+              <Card title={category.name} youtubeUrl={category.video_link}>
                 <div className="category-content">
-                    <div
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html: DOMPurify.sanitize(category.content),
+                    }}
+                  ></div>
+                  {category.examples?.map((example, idx) => (
+                    <div key={idx}>
+                      <h4
                         dangerouslySetInnerHTML={{
-                            __html: DOMPurify.sanitize(category.content),
+                          __html: DOMPurify.sanitize(example.title),
                         }}
-                    ></div>
-                    {category.examples?.map((example, idx) => (
-                        <div key={idx}>
-                            <h4
-                                dangerouslySetInnerHTML={{
-                                    __html: DOMPurify.sanitize(example.title),
-                                }}
-                            ></h4>
-                            <div>
-                                <code
-                                    dangerouslySetInnerHTML={{
-                                        __html: DOMPurify.sanitize(example.code),
-                                    }}
-                                ></code>
-                            </div>
-                            <div
-                                dangerouslySetInnerHTML={{
-                                    __html: DOMPurify.sanitize(example.description),
-                                }}
-                            ></div>
-                        </div>
-                    ))}
+                      ></h4>
+                      <div>
+                        <code
+                          dangerouslySetInnerHTML={{
+                            __html: DOMPurify.sanitize(example.code),
+                          }}
+                        ></code>
+                      </div>
+                      <div
+                        dangerouslySetInnerHTML={{
+                          __html: DOMPurify.sanitize(example.description),
+                        }}
+                      ></div>
+                    </div>
+                  ))}
                 </div>
-            </Card>
+              </Card>
 
-            {/* Show Adsterra after the 3rd card */}
-            {index === 2 && <Adsterra />}
-        </React.Fragment>
-    ))}
-</section>
-
+              {/* ✅ Show Adsterra after the 3rd card */}
+              {index === 2 && <AdsterraBanner />}
+            </React.Fragment>
+          ))}
+        </section>
       </section>
 
+      {/* ✅ Footer now properly placed at the bottom */}
       <Footer />
 
+      {/* ✅ Lazy-loaded popup editor */}
       <Suspense fallback={<div>Loading...</div>}>
         <PopupEditor />
       </Suspense>
