@@ -7,6 +7,7 @@ import { FaArrowCircleLeft } from "react-icons/fa";
 import DOMPurify from "dompurify";
 import Card from "../components/card";
 import { storeData, getData } from "../utils/indexedDB"; // Import IndexedDB utility functions
+
 const PopupEditor = lazy(() => import("../components/popEditor"));
 
 export default function SinglePage() {
@@ -18,29 +19,23 @@ export default function SinglePage() {
 
     useEffect(() => {
         const fetchLanguage = async () => {
-            const cacheKey = `language-${slug}`; // Unique key for caching per slug
+            const cacheKey = `language-${slug}`;
 
-            // Check IndexedDB for cached data
             const cachedData = await getData(cacheKey);
             if (cachedData) {
                 setLanguage(cachedData);
                 setLoading(false);
-                console.log("Loaded language from cache");
                 return;
             }
 
-            // Fetch from API and cache the result
             try {
                 const response = await fetch(`https://siitecch.onrender.com/api/languages/${slug}`);
-                if (!response.ok) {
-                    throw new Error("Failed to fetch language");
-                }
+                if (!response.ok) throw new Error("Failed to fetch language");
+
                 const data = await response.json();
                 setLanguage(data);
-                await storeData(cacheKey, data); // Cache data in IndexedDB
-                console.log("Fetched language from API and cached");
+                await storeData(cacheKey, data);
             } catch (error) {
-                console.error("Error:", error.message);
                 setErrorMessage("Content Coming Soon...!");
             } finally {
                 setLoading(false);
@@ -51,15 +46,21 @@ export default function SinglePage() {
     }, [slug]);
 
     useEffect(() => {
-        if (language?.categories?.length && window.hljs) { //  Ensure hljs exists & categories are loaded
+        if (language?.categories?.length && window.hljs) {
             setTimeout(() => {
                 document.querySelectorAll("pre code").forEach((block) => {
-                    window.hljs.highlightElement(block); //  Apply syntax highlighting
+                    window.hljs.highlightElement(block);
                 });
-            }, 300); // Increased delay to ensure content is fully loaded
+            }, 300);
         }
-    }, [language?.categories]); // Trigger effect when categories change
+    }, [language?.categories]);
 
+    useEffect(() => {
+        const adScript = document.createElement("script");
+        adScript.src = "//www.highperformanceformat.com/10ff9d2a16eeb48f638d8af08b400d8f/invoke.js";
+        adScript.async = true;
+        document.body.appendChild(adScript);
+    }, []);
 
     if (loading) {
         return (
@@ -72,11 +73,7 @@ export default function SinglePage() {
     if (errorMessage) {
         return (
             <div className="no-data-container">
-                <img
-                    src="/images/No-Data.svg"
-                    alt="No Data Found"
-                    className="no-data-image"
-                />
+                <img src="/images/No-Data.svg" alt="No Data Found" className="no-data-image" />
                 <p>{errorMessage}</p>
                 <Link to="/">
                     <button className="buttonback">
@@ -91,72 +88,48 @@ export default function SinglePage() {
         <>
             <SingleHeader />
             <section className={`singleDisplay ${theme}`}>
-                {/* Introduction Section */}
                 <div className="introduction">
                     <h1>{language?.name}</h1>
-                    <div
-                        className="intro-desc"
-                        dangerouslySetInnerHTML={{
-                            __html: DOMPurify.sanitize(language?.description),
-                        }}
-                    ></div>
+                    <div className="intro-desc" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(language?.description) }}></div>
                 </div>
 
-              <section className="single-container">
-    {language?.categories?.map((category, index) => (
-        <React.Fragment key={category.id}>
-            <Card title={category.name} youtubeUrl={category.video_link}>
-                <div className="category-content">
-                    <div
-                        dangerouslySetInnerHTML={{
-                            __html: DOMPurify.sanitize(category.content),
-                        }}
-                    ></div>
-                    {category.examples?.map((example, idx) => (
-                        <div key={idx}>
-                            <h4
-                                dangerouslySetInnerHTML={{
-                                    __html: DOMPurify.sanitize(example.title),
-                                }}
-                            ></h4>
-                            <div>
-                                <code
-                                    dangerouslySetInnerHTML={{
-                                        __html: DOMPurify.sanitize(example.code),
-                                    }}
-                                ></code>
+                {/* Adsterra Ad Card */}
+                <div className="adsterra-banner">
+                    <h3>Sponsored</h3>
+                    <div id="adsterra-banner">
+                        <script type="text/javascript">
+                            {`
+                                atOptions = {
+                                    'key' : '10ff9d2a16eeb48f638d8af08b400d8f',
+                                    'format' : 'iframe',
+                                    'height' : 90,
+                                    'width' : 728,
+                                    'params' : {}
+                                };
+                                document.write('<scr' + 'ipt type="text/javascript" src="//www.highperformanceformat.com/10ff9d2a16eeb48f638d8af08b400d8f/invoke.js"></scr' + 'ipt>');
+                            `}
+                        </script>
+                    </div>
+                </div>
+
+                <section className="single-container">
+                    {language?.categories?.map((category) => (
+                        <Card key={category.id} title={category.name} youtubeUrl={category.video_link}>
+                            <div className="category-content">
+                                <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(category.content) }}></div>
+                                {category.examples?.map((example, index) => (
+                                    <div key={index}>
+                                        <h4 dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(example.title) }}></h4>
+                                        <div>
+                                            <code dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(example.code) }}></code>
+                                        </div>
+                                        <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(example.description) }}></div>
+                                    </div>
+                                ))}
                             </div>
-                            <div
-                                dangerouslySetInnerHTML={{
-                                    __html: DOMPurify.sanitize(example.description),
-                                }}
-                            ></div>
-                        </div>
+                        </Card>
                     ))}
-                </div>
-            </Card>
-
-            {/* ✅ Adsterra Banner as a Card After Every 3rd Card */}
-            {(index + 1) % 3 === 0 && (
-                <div className="ad-card">
-                    <script type="text/javascript">
-                        {`
-                        atOptions = {
-                            'key': '10ff9d2a16eeb48f638d8af08b400d8f',
-                            'format': 'iframe',
-                            'height': 90,
-                            'width': 728,
-                            'params': {}
-                        };
-                        `}
-                    </script>
-                    <script type="text/javascript" src="//www.highperformanceformat.com/10ff9d2a16eeb48f638d8af08b400d8f/invoke.js"></script>
-                </div>
-            )}
-        </React.Fragment>
-    ))}
-</section>
-
+                </section>
             </section>
             <Footer />
             <Suspense fallback={<div>Loading...</div>}>
