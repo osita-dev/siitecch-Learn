@@ -1,5 +1,3 @@
-// Import Monetag's push notification script
-importScripts("https://up.adsco.re/sw.js");
 
 gitself.addEventListener('install', (event) => {
   event.waitUntil(
