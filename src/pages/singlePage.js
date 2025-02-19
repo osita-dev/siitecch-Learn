@@ -102,44 +102,61 @@ export default function SinglePage() {
                     ></div>
                 </div>
 
-                <section className="single-container">
-                    {language?.categories?.map((category) => (
-                        <Card
-                            key={category.id} // Ensure unique ID
-                            title={category.name}
-                            youtubeUrl={category.video_link}
-                        >
-                            <div className="category-content">
-                                <div
+              <section className="single-container">
+    {language?.categories?.map((category, index) => (
+        <React.Fragment key={category.id}>
+            <Card title={category.name} youtubeUrl={category.video_link}>
+                <div className="category-content">
+                    <div
+                        dangerouslySetInnerHTML={{
+                            __html: DOMPurify.sanitize(category.content),
+                        }}
+                    ></div>
+                    {category.examples?.map((example, idx) => (
+                        <div key={idx}>
+                            <h4
+                                dangerouslySetInnerHTML={{
+                                    __html: DOMPurify.sanitize(example.title),
+                                }}
+                            ></h4>
+                            <div>
+                                <code
                                     dangerouslySetInnerHTML={{
-                                        __html: DOMPurify.sanitize(category.content),
+                                        __html: DOMPurify.sanitize(example.code),
                                     }}
-                                ></div>
-                                {category.examples?.map((example, index) => (
-                                    <div key={index}>
-                                        <h4
-                                            dangerouslySetInnerHTML={{
-                                                __html: DOMPurify.sanitize(example.title),
-                                            }}
-                                        ></h4>
-                                        <div>
-                                            <code
-                                                dangerouslySetInnerHTML={{
-                                                    __html: DOMPurify.sanitize(example.code),
-                                                }}
-                                            ></code>
-                                        </div>
-                                        <div
-                                            dangerouslySetInnerHTML={{
-                                                __html: DOMPurify.sanitize(example.description),
-                                            }}
-                                        ></div>
-                                    </div>
-                                ))}
+                                ></code>
                             </div>
-                        </Card>
+                            <div
+                                dangerouslySetInnerHTML={{
+                                    __html: DOMPurify.sanitize(example.description),
+                                }}
+                            ></div>
+                        </div>
                     ))}
-                </section>
+                </div>
+            </Card>
+
+            {/* ✅ Adsterra Banner as a Card After Every 3rd Card */}
+            {(index + 1) % 3 === 0 && (
+                <div className="ad-card">
+                    <script type="text/javascript">
+                        {`
+                        atOptions = {
+                            'key': '10ff9d2a16eeb48f638d8af08b400d8f',
+                            'format': 'iframe',
+                            'height': 90,
+                            'width': 728,
+                            'params': {}
+                        };
+                        `}
+                    </script>
+                    <script type="text/javascript" src="//www.highperformanceformat.com/10ff9d2a16eeb48f638d8af08b400d8f/invoke.js"></script>
+                </div>
+            )}
+        </React.Fragment>
+    ))}
+</section>
+
             </section>
             <Footer />
             <Suspense fallback={<div>Loading...</div>}>
