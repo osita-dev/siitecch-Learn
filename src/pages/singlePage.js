@@ -7,8 +7,7 @@ import { FaArrowCircleLeft } from "react-icons/fa";
 import DOMPurify from "dompurify";
 import Card from "../components/card";
 import { storeData, getData } from "../utils/indexedDB";
-import AdsterraBanner from "../components/Adsterra"; // 
-
+import AdsterraBanner from "../components/adsterra";
 const PopupEditor = lazy(() => import("../components/popEditor"));
 
 export default function SinglePage() {
