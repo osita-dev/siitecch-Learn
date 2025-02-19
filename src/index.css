@@ -59,6 +59,19 @@
   --blueSocial: #4D9FEB;
 }
 
+.ad-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+    padding: 15px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    min-height: 100px; /* Ensure it looks like other cards */
+}
+
+
 body {
   background-color: var(---bglight);
   color: var(--white);
