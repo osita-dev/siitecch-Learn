@@ -87,26 +87,46 @@ export default function SinglePage() {
         </div>
 
         {/* ✅ Adsterra Banner Placement */}
-        <AdsterraBanner />
-
-        <section className="single-container">
-          {language?.categories?.map((category) => (
-            <Card key={category.id} title={category.name} youtubeUrl={category.video_link}>
-              <div className="category-content">
-                <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(category.content) }}></div>
-                {category.examples?.map((example, index) => (
-                  <div key={index}>
-                    <h4 dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(example.title) }}></h4>
-                    <div>
-                      <code dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(example.code) }}></code>
-                    </div>
-                    <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(example.description) }}></div>
-                  </div>
-                ))}
-              </div>
+      <section className="single-container">
+    {language?.categories?.map((category, index) => (
+        <React.Fragment key={category.id}>
+            <Card title={category.name} youtubeUrl={category.video_link}>
+                <div className="category-content">
+                    <div
+                        dangerouslySetInnerHTML={{
+                            __html: DOMPurify.sanitize(category.content),
+                        }}
+                    ></div>
+                    {category.examples?.map((example, idx) => (
+                        <div key={idx}>
+                            <h4
+                                dangerouslySetInnerHTML={{
+                                    __html: DOMPurify.sanitize(example.title),
+                                }}
+                            ></h4>
+                            <div>
+                                <code
+                                    dangerouslySetInnerHTML={{
+                                        __html: DOMPurify.sanitize(example.code),
+                                    }}
+                                ></code>
+                            </div>
+                            <div
+                                dangerouslySetInnerHTML={{
+                                    __html: DOMPurify.sanitize(example.description),
+                                }}
+                            ></div>
+                        </div>
+                    ))}
+                </div>
             </Card>
-          ))}
-        </section>
+
+            {/* Show Adsterra after the 3rd card */}
+            {index === 2 && <Adsterra />}
+        </React.Fragment>
+    ))}
+</section>
+
       </section>
 
       <Footer />
