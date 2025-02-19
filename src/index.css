@@ -59,7 +59,7 @@
   --blueSocial: #4D9FEB;
 }
 
-.adsterra-banner {
+.adsterra-container {
     display: flex;
     justify-content: center;
     align-items: center;
