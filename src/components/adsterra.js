@@ -10,7 +10,7 @@ const AdsterraBanner = () => {
        'key' : '6a1e732fc686cc4710fbf36262fe2284',
 		'format' : 'iframe',
 		'height' : 50,
-		'width' : "100%",
+		'width' : 320,
 		'params' : {}
       };
     `;
