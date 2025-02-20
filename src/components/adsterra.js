@@ -19,7 +19,7 @@ const AdsterraBanner = () => {
     const adScript = document.createElement("script");
     adScript.type = "text/javascript";
     adScript.async = true;
-    adScript.src = "//www.highperformanceformat.com/6a1e732fc686cc4710fbf36262fe2284/invoke.js";
+    adScript.src = "//buttergem.com/6a1e732fc686cc4710fbf36262fe2284/invoke.js";
     document.body.appendChild(adScript);
 
     return () => {
