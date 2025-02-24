@@ -1,4 +1,3 @@
-
 import { useTheme } from "../context/themeContext";
 import { Link } from "react-router-dom";
 import {
@@ -219,7 +218,9 @@ export default function Footer() {
                 Sitemap
               </Link>
             </div>
-            
+            <div >
+                 <AdsterraBanner />
+            </div>
             <button
               className={`install-app ${isAppInstalled ? "disabled" : ""}`}
               onClick={handleInstall}
@@ -236,7 +237,7 @@ export default function Footer() {
         <div className="copy">
           &copy; {new Date().getFullYear()} siitecch, All rights reserved.
         </div>
-               <AdsterraBanner />
+              
       </footer>
     </>
   );
