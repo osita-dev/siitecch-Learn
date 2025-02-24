@@ -9,8 +9,8 @@ const AdsterraBanner = () => {
       window.atOptions = {
         key: "10ff9d2a16eeb48f638d8af08b400d8f",
         format: "iframe",
-        height: 90,
-        width: 728,
+        height: 50,
+        width: 320,
         params: {}
       };
     `;
