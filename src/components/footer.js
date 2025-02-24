@@ -12,7 +12,7 @@ import {
 import { FaGithub } from "react-icons/fa6";
 import Quickref from "./quickref";
 import { useState, useEffect } from "react";
-
+import AdsterraBanner from "./adsterra";
 export default function Footer() {
   const { theme } = useTheme();
   const youTube = "https://youtube.com/@siitecch?si=ngX7lFMF0IWnU8X0";
@@ -236,6 +236,7 @@ export default function Footer() {
         <div className="copy">
           &copy; {new Date().getFullYear()} siitecch, All rights reserved.
         </div>
+               <AdsterraBanner />
       </footer>
     </>
   );
