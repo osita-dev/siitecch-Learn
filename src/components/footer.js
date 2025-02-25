@@ -218,9 +218,7 @@ export default function Footer() {
                 Sitemap
               </Link>
             </div>
-            <div >
-                 <AdsterraBanner />
-            </div>
+            
             <button
               className={`install-app ${isAppInstalled ? "disabled" : ""}`}
               onClick={handleInstall}
